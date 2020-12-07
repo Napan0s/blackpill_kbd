@@ -17,28 +17,31 @@
 #pragma once
 
 #include "config_common.h"
-
 #define VENDOR_ID 0xFEED
 #define PRODUCT_ID 0x002A
-#define DEVICE_VER 0x0002
+#define DEVICE_VER 0x0003
 #define MANUFACTURER Napan0s_Inc
 #define PRODUCT BlackPill_KBD
 #define MATRIX_ROWS 5
 #define MATRIX_COLS 15
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 120 // DO NOT CHANGE THIS VALUE!!!
 
 // The pin connected to the data pin of the LEDs
-#define RGB_DI_PIN B4
+#define RGB_DI_PIN A9
 // The number of LEDs connected
-#define DRIVER_LED_TOTAL 83 // 75 leds for backlighting and 8 for underglow
-#define RGBLED_NUM 83
+#define DRIVER_LED_TOTAL 93 // 75 leds for backlighting and 8 for underglow
+#define RGBLED_NUM 93
 #define RGB_MATRIX_KEYPRESSES
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100
-//#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_SOLID_REACTIVE
-//#define RGB_MATRIX_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
+#define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
+#define RGB_MATRIX_STARTUP_SPD 31
+#define RGB_MATRIX_STARTUP_VAL 100 // Sets the default brightness value, if none has been set
+
+#define RGB_DISABLE_TIMEOUT 600000
+#define RGB_MATRIX_SLEEP  /* If defined, the RGB lighting will be switched off when the host goes to sleep */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED true
 
-#define MATRIX_ROW_PINS { B9, B8, B7, B6, B5}
-#define MATRIX_COL_PINS { B1, B10, B0, A5, A7, A6, A3, A2, A0, A1, B13, B14, B15, A8, A9}
+#define MATRIX_ROW_PINS { C14, B9, A2, A1, A3}
+#define MATRIX_COL_PINS { B10, B0, B1, A5, A7, A6, B4, B5, A0, B8, B14, C15, B13, B15, A8}
 
 #define UNUSED_PINS
 
@@ -48,8 +51,6 @@
 
 #define TAPPING_TERM 175
 
-	
+#define COMBO_COUNT 1
 
-// i2c_master driver config 
-#define I2C1_CLOCK_SPEED 100000
-#define I2C1_DUTY_CYCLE STD_DUTY_CYCLE // FAST_DUTY_CYCLE_2
+#define DEBUG_MATRIX_SCAN_RATE
