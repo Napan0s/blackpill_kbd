@@ -129,8 +129,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT_ortho_5x15(
     RESET, DEBUG, EEP_RST, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_WH_U, 
-    KC_NO, KC_QMK_TLBX, KC_WHATSAPP, KC_NO, KC_NO, KC_TELEGRAM, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_WH_D, 
-    KC_NO, KC_NO, KC_SPOTIFY, KC_NO, KC_NO, KC_GOOGLE, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+    KC_NO, KC_QMK_TLBX, KC_WHATSAPP, KC_NO, KC_NO, KC_TELEGRAM, KC_NO, KC_NO, KC_UP, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_WH_D, 
+    KC_NO, KC_NO, KC_SPOTIFY, KC_NO, KC_NO, KC_GOOGLE, KC_NO, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BTN4, KC_BTN1, KC_MS_U, KC_BTN2, 
     KC_PWR, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BTN3, KC_MS_L, KC_MS_D, KC_MS_R),
 
@@ -213,7 +213,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_ACC:
             if (record->event.pressed) {
                         sleepmode_before_mode = rgb_matrix_get_mode();
-                        rgb_matrix_mode(RGB_MATRIX_CUSTOM_my_cool_effect);
+                        // rgb_matrix_mode(RGB_MATRIX_CUSTOM_my_cool_effect);
                         SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_LALT) SS_UP(X_LSFT));
                         layer_on(_ACCENTED);
             } else {
@@ -225,10 +225,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_SEC:
             if (record->event.pressed) {
                         sleepmode_before_mode = rgb_matrix_get_mode();
-                        rgb_matrix_mode(RGB_MATRIX_CUSTOM_SECOND);
+                        //rgb_matrix_mode(RGB_MATRIX_CUSTOM_SECOND);
                         layer_on(_SECOND);
             } else {
-                rgb_matrix_mode(sleepmode_before_mode);
+                //rgb_matrix_mode(sleepmode_before_mode);
                 layer_off(_SECOND);
             }
             break;
@@ -249,4 +249,62 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void suspend_power_down_user(void) {
     rgb_matrix_set_suspend_state(true);
+}
+
+void rgb_matrix_indicators_kb(void)
+{
+	if (!g_suspend_state && rgb_matrix_config.enable) {
+        int val = (rgb_matrix_get_val()/0.8);
+        switch (get_highest_layer(layer_state)) {
+            //case _qwerty:
+            //    rgb_matrix_set_color(26, 0xFF, 0x00, 0x00);
+            //    break;
+            case _SECOND:
+                rgb_matrix_set_color(1, val, val, val);
+                rgb_matrix_set_color(2, val, val, val);
+                rgb_matrix_set_color(3, val, val, val);
+                rgb_matrix_set_color(4, val, val, val);
+                rgb_matrix_set_color(5, val, val, val);
+                rgb_matrix_set_color(6, val, val, val);
+                rgb_matrix_set_color(7, val, val, val);
+                rgb_matrix_set_color(8, val, val, val);
+                rgb_matrix_set_color(9, val, val, val);
+                rgb_matrix_set_color(10, val, val, val);
+                rgb_matrix_set_color(19, val, val, val);
+                rgb_matrix_set_color(20, 0, val, 0);
+                rgb_matrix_set_color(21, 0, val, 0);
+                rgb_matrix_set_color(22, 0, val, 0);
+                rgb_matrix_set_color(23, 0, val, 0);
+                rgb_matrix_set_color(24, 0, val, 0);
+                rgb_matrix_set_color(25, 0, val, 0);
+                rgb_matrix_set_color(26, 0, val, 0);
+                rgb_matrix_set_color(27, 0, val, 0);
+
+                rgb_matrix_set_color(12, val/2, val, 0);
+                rgb_matrix_set_color(13, val/2, val, 0);
+                rgb_matrix_set_color(14, val/2, val, 0);
+                rgb_matrix_set_color(15, val/2, val, 0);
+                rgb_matrix_set_color(16, val/2, val, 0);
+                rgb_matrix_set_color(17, val/2, val, 0);
+                rgb_matrix_set_color(42, val/2, val, 0);
+                rgb_matrix_set_color(43, val/2, val, 0);
+                rgb_matrix_set_color(44, val/2, val, 0);
+                rgb_matrix_set_color(45, val/2, val, 0);
+                rgb_matrix_set_color(46, val/2, val, 0);
+                rgb_matrix_set_color(47, val/2, val, 0);
+                rgb_matrix_set_color(73, val/2, val, 0);
+                rgb_matrix_set_color(74, val/2, val, 0);
+                break;
+            case _ACCENTED:
+                rgb_matrix_set_color(20, val, val, val);
+                rgb_matrix_set_color(21, val, val, val);
+                rgb_matrix_set_color(22, val, val, val);
+                rgb_matrix_set_color(26, val, val, val);
+                rgb_matrix_set_color(31, val, val, val);
+                break;
+            case _LOWER:
+                rgb_matrix_set_color(0, val, 0, 0);
+
+        }
+    }
 }
