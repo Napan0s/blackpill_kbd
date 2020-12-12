@@ -29,8 +29,8 @@
 // The pin connected to the data pin of the LEDs
 #define RGB_DI_PIN A9
 // The number of LEDs connected
-#define DRIVER_LED_TOTAL 93 // 75 leds for backlighting and 8 for underglow
-#define RGBLED_NUM 93
+#define DRIVER_LED_TOTAL 75 // 75 leds for backlighting and 18 for underglow
+#define RGBLED_NUM 75
 #define RGB_MATRIX_KEYPRESSES
 #define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
 #define RGB_MATRIX_STARTUP_SPD 31
@@ -51,6 +51,7 @@
 
 #define TAPPING_TERM 175
 
-#define COMBO_COUNT 1
 
 #define DEBUG_MATRIX_SCAN_RATE
+
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS

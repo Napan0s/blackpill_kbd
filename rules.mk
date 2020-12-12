@@ -28,7 +28,7 @@ BLUETOOTH_ENABLE = no       # Enable Bluetooth
 AUDIO_ENABLE = no           # Audio output
 
 LAYOUTS = ortho_5x15
-EEPROM_DRIVER = vendor
 COMBO_ENABLE = yes
 TAP_DANCE_ENABLE = no
+EEPROM_DRIVER = i2c
 UNICODE_ENABLE = yes
